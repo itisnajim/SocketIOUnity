@@ -1,0 +1,31 @@
+{
+  "name": "com.itisnajim.socketiounity",
+  "version": "1.0.0",
+  "description": "A Wrapper for [socket.io-client-csharp](https://github.com/doghappy/socket.io-client-csharp) to work with Unity.",
+  "displayName": "Unity SocketIO",
+  "unity": "2018.4",
+  "documentationUrl": "https://github.com/itisnajim/SocketIOUnity",
+  "changelogUrl": "https://github.com/itisnajim/SocketIOUnity/releases",
+  "licensesUrl": "https://github.com/itisnajim/SocketIOUnity/blob/main/LICENSE",
+  "keywords": [
+    "Unity",
+    "socket.io",
+    "Realtime",
+    "WebSocket",
+    "Connection",
+    "tcp",
+    "events",
+    "socket",
+    "io"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/itisnajim/SocketIOUnity"
+  },
+  "author": {
+    "name": "itisnajim",
+    "email": "itisnajim@gmail.com",
+    "url": "https://www.itisnajim.com"
+  }
+}
