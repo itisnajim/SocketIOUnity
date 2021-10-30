@@ -10,7 +10,7 @@ Supports socket.io server v2/v3/v4, and has implemented http polling and websock
 Other platforms(including the Editor) have not been tested or/and not working!
 
 ## Example
-![Example](https://github.com/itisnajim/SocketIOUnity/blob/main/example.gif?raw=true)
+![Example](https://github.com/itisnajim/SocketIOUnity/blob/main/Samples~/example.gif?raw=true)
 
 ## Installation
 Copy this url: 
