@@ -6,6 +6,7 @@ Supports socket.io server v2/v3/v4, and has implemented http polling and websock
 
 ## Supported Platforms
 💻 PC/Mac, 🍎 iOS, 🤖 Android
+
 Other platforms(including the Editor) have not been tested or/and not working!
 
 ## Example
@@ -60,7 +61,7 @@ socket.On("eventName", (response) =>
     ...
 });
 ```
-if you want to play with unity game objects (eg: rotating an object) or saving date using PlayerPrefs system use this instead:
+if you want to play with unity game objects (eg: rotating an object) or saving data using PlayerPrefs system use this instead:
 ```csharp
 socket.OnUnityThread("spin", (response) =>
 {
