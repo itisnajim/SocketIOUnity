@@ -4,10 +4,14 @@
 A Wrapper for [socket.io-client-csharp](https://github.com/doghappy/socket.io-client-csharp) to work with Unity,
 Supports socket.io server v2/v3/v4, and has implemented http polling and websocket. 
 
+## Give a Star! ⭐
+Feel free to request an issue on github if you find bugs or request a new feature. 
+If you find this useful, please give it a star to show your support for this project.
+
 ## Supported Platforms
 💻 PC/Mac, 🍎 iOS, 🤖 Android
 
-Other platforms(including the Editor) have not been tested or/and not working!
+Other platforms(including the Editor) have not been tested or/and may not work!
 
 ## Example
 ![Example](https://github.com/itisnajim/SocketIOUnity/blob/main/Samples~/example.gif?raw=true)
@@ -20,20 +24,18 @@ https://github.com/itisnajim/SocketIOUnity.git
 then in unity open Window -> Package Manager -> and click (+) add package from git URL... and past it there.
 
 ## Usage
-Check the 'sample' folder and [socket.io-client-csharp](https://github.com/doghappy/socket.io-client-csharp) repo for more usage info.
+Check the 'Samples~' folder and [socket.io-client-csharp](https://github.com/doghappy/socket.io-client-csharp) repo for more usage info.
 
 ### Initiation: 
 You may want to put the script on the Camera Object or using ```DontDestroyOnLoad``` to keep the socket alive between scenes!
 ```csharp
-var uri = new Uri("http://www.example.com");
+var uri = new Uri("https://www.example.com");
 socket = new SocketIOUnity(uri, new SocketIOOptions
 {
     Query = new Dictionary<string, string>
         {
             {"token", "UNITY" }
         }
-    ,
-    EIO = 4
     ,
     Transport = SocketIOClient.Transport.TransportProtocol.WebSocket
 });
@@ -66,6 +68,10 @@ socket.On("eventName", (response) =>
 ```
 if you want to play with unity game objects (eg: rotating an object) or saving data using PlayerPrefs system use this instead:
 ```csharp
+// Set (unityThreadScope) the thread scope function where the code should run.
+// Options are: .Update, .LateUpdate or .FixedUpdate, default: UnityThreadScope.Update
+socket.unityThreadScope = UnityThreadScope.Update; 
+// "spin" is an example of an event name.
 socket.OnUnityThread("spin", (response) =>
 {
     objectToSpin.transform.Rotate(0, 45, 0);
@@ -78,10 +84,16 @@ socket.On("spin", (response) =>
     UnityThread.executeInUpdate(() => {
         objectToSpin.transform.Rotate(0, 45, 0);
     });
+    /* 
+    or  
+    UnityThread.executeInLateUpdate(() => { ... });
+    or 
+    UnityThread.executeInFixedUpdate(() => { ... });
+    */
 });
 ```
 
-### Connecting/Disconecting
+### Connecting/Disconecting: 
 ```csharp
 socket.Connect();
 await socket.ConnectAsync();
@@ -121,6 +133,18 @@ io.on('connection', socket => {
 io.listen(port);
 console.log('listening on *:' + port);
 ```
+
+## Acknowledgement
+[socket.io-client-csharp](https://github.com/doghappy/socket.io-client-csharp)
+
+[Socket.IO](https://github.com/socketio/socket.io)
+
+[System.Text.Json](https://docs.microsoft.com/en-us/dotnet/api/system.text.json)
+
+[Newtonsoft Json.NET](https://www.newtonsoft.com/json/help/html/Introduction.htm)
+
+[Unity Documentation](https://docs.unity.com)
+
 
 ## Author
 
