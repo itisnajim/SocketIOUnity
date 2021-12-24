@@ -19,7 +19,8 @@ Other platforms(including the Editor) have not been tested or/and may not work!
 ## Installation
 Copy this url: 
 ```https://github.com/itisnajim/SocketIOUnity.git```
-then in unity open Window -> Package Manager -> and click (+) add package from git URL... and past it there.
+then in unity open Window -> Package Manager -> and click (+) add package from git URL... and past it there. 
+For Unity versions less than 2021.2.0 (that do not support .Net Standard 2.1) use this url ```https://github.com/itisnajim/SocketIOUnity.git#v1.0.0``` instead!
 
 ## Usage
 Check the 'Samples~' folder and [socket.io-client-csharp](https://github.com/doghappy/socket.io-client-csharp) repo for more usage info.

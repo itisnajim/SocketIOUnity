@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SocketIOClient.JsonSerializer;
 using SocketIOClient.Messages;
+using SocketIOClient.Routers;
 using SocketIOClient.Transport;
 
 namespace SocketIOClient
@@ -64,7 +65,7 @@ namespace SocketIOClient
             }
         }
 
-        public TransportRouter Router { get; private set; }
+        public Router Router { get; private set; }
 
         /// <summary>
         /// An unique identifier for the socket session. Set after the connect event is triggered, and updated after the reconnect event.
@@ -102,7 +103,7 @@ namespace SocketIOClient
         Dictionary<int, Action<SocketIOResponse>> _ackHandlers;
         List<OnAnyHandler> _onAnyHandlers;
         Dictionary<string, Action<SocketIOResponse>> _eventHandlers;
-        CancellationTokenSource _connectionTokenSorce;
+        CancellationTokenSource _connectionTokenSource;
         double _reconnectionDelay;
 
         #region Socket.IO event
@@ -149,7 +150,7 @@ namespace SocketIOClient
             _onAnyHandlers = new List<OnAnyHandler>();
 
             JsonSerializer = new SystemTextJsonSerializer();
-            _connectionTokenSorce = new CancellationTokenSource();
+            _connectionTokenSource = new CancellationTokenSource();
             HttpClient = new HttpClient();
             ClientWebSocketProvider = () => new DefaultClientWebSocket();
             _expectedExceptions = new List<Type>
@@ -165,11 +166,16 @@ namespace SocketIOClient
         {
             if (Router == null)
             {
-                Router = new TransportRouter(HttpClient, ClientWebSocketProvider, Options)
+                if (Options.Transport == TransportProtocol.Polling)
                 {
-                    Namespace = Namespace,
-                    ServerUri = ServerUri
-                };
+                    Router = new HttpRouter(HttpClient, ClientWebSocketProvider, Options);
+                }
+                else
+                {
+                    Router = new WebSocketRouter(HttpClient, ClientWebSocketProvider, Options);
+                }
+                Router.Namespace = Namespace;
+                Router.ServerUri = ServerUri;
                 Router.OnMessageReceived = OnMessageReceived;
                 Router.OnTransportClosed = OnTransportClosed;
             }
@@ -183,7 +189,7 @@ namespace SocketIOClient
             {
                 try
                 {
-                    if (_connectionTokenSorce.IsCancellationRequested)
+                    if (_connectionTokenSource.IsCancellationRequested)
                     {
                         break;
                     }
@@ -505,7 +511,7 @@ namespace SocketIOClient
                     Id = packetId
                 };
             }
-            await Router.SendAsync(msg, cancellationToken);
+            await Router.SendAsync(msg, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -516,7 +522,7 @@ namespace SocketIOClient
         /// <returns></returns>
         public async Task EmitAsync(string eventName, params object[] data)
         {
-            await EmitAsync(eventName, CancellationToken.None, data);
+            await EmitAsync(eventName, CancellationToken.None, data).ConfigureAwait(false);
         }
 
         public async Task EmitAsync(string eventName, CancellationToken cancellationToken, params object[] data)
@@ -524,7 +530,6 @@ namespace SocketIOClient
             if (data != null && data.Length > 0)
             {
                 var result = JsonSerializer.Serialize(data);
-                Debug.Print("result json " + result.Json);
                 if (result.Bytes.Count > 0)
                 {
                     var msg = new BinaryMessage
@@ -534,7 +539,7 @@ namespace SocketIOClient
                         Event = eventName,
                         Json = result.Json
                     };
-                    await Router.SendAsync(msg, cancellationToken);
+                    await Router.SendAsync(msg, cancellationToken).ConfigureAwait(false);
                 }
                 else
                 {
@@ -544,7 +549,7 @@ namespace SocketIOClient
                         Event = eventName,
                         Json = result.Json
                     };
-                    await Router.SendAsync(msg, cancellationToken);
+                    await Router.SendAsync(msg, cancellationToken).ConfigureAwait(false);
                 }
             }
             else
@@ -554,7 +559,7 @@ namespace SocketIOClient
                     Namespace = Namespace,
                     Event = eventName
                 };
-                await Router.SendAsync(msg, cancellationToken);
+                await Router.SendAsync(msg, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -567,7 +572,7 @@ namespace SocketIOClient
         /// <returns></returns>
         public async Task EmitAsync(string eventName, Action<SocketIOResponse> ack, params object[] data)
         {
-            await EmitAsync(eventName, CancellationToken.None, ack, data);
+            await EmitAsync(eventName, CancellationToken.None, ack, data).ConfigureAwait(false);
         }
 
         public async Task EmitAsync(string eventName, CancellationToken cancellationToken, Action<SocketIOResponse> ack, params object[] data)
@@ -586,7 +591,7 @@ namespace SocketIOClient
                         Id = _packetId,
                         OutgoingBytes = new List<byte[]>(result.Bytes)
                     };
-                    await Router.SendAsync(msg, cancellationToken);
+                    await Router.SendAsync(msg, cancellationToken).ConfigureAwait(false);
                 }
                 else
                 {
@@ -597,7 +602,7 @@ namespace SocketIOClient
                         Id = _packetId,
                         Json = result.Json
                     };
-                    await Router.SendAsync(msg, cancellationToken);
+                    await Router.SendAsync(msg, cancellationToken).ConfigureAwait(false);
                 }
             }
             else
@@ -608,7 +613,7 @@ namespace SocketIOClient
                     Namespace = Namespace,
                     Id = _packetId
                 };
-                await Router.SendAsync(msg, cancellationToken);
+                await Router.SendAsync(msg, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -620,7 +625,7 @@ namespace SocketIOClient
                 OnDisconnected?.Invoke(this, reason);
                 try
                 {
-                    await Router.DisconnectAsync();
+                    await Router.DisconnectAsync().ConfigureAwait(false);
                 }
                 catch (Exception e)
                 {
@@ -652,8 +657,8 @@ namespace SocketIOClient
             _ackHandlers.Clear();
             _onAnyHandlers.Clear();
             _eventHandlers.Clear();
-            _connectionTokenSorce.Cancel();
-            _connectionTokenSorce.Dispose();
+            _connectionTokenSource.Cancel();
+            _connectionTokenSource.Dispose();
         }
     }
 }
