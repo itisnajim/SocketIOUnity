@@ -98,7 +98,7 @@ namespace SocketIOClient
         public Func<IClientWebSocket> ClientWebSocketProvider { get; set; }
         private IClientWebSocket _clientWebsocket;
 
-        BaseTransport _transport;
+        public BaseTransport _transport;
 
         List<Type> _expectedExceptions;
 
