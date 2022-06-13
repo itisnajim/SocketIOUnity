@@ -23,7 +23,7 @@
     "io"
   ],
   "dependencies": {
-    "nuget.newtonsoft-json" : "3.0.2"
+    "com.unity.nuget.newtonsoft-json" : "3.0.2"
   },
   "license": "MIT",
   "repository": {
