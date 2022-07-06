@@ -51,6 +51,12 @@ socket.JsonSerializer = new NewtonsoftJsonSerializer();
 socket.Emit("eventName");
 socket.Emit("eventName", "Hello World");
 socket.Emit("eventName", someObject);
+
+socket.EmitResponse("eventName",(response)=>{
+    string text = response.GetValue<string>();
+    print(text);
+}, someObject);
+
 socket.EmitStringAsJSON("eventName", "{\"foo\": \"bar\"}");
 await client.EmitAsync("hi", "socket.io"); // Here you should make the method async
 ```
