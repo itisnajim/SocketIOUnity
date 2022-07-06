@@ -18,7 +18,7 @@ Other platforms(including the Editor) have not been tested or/and may not work!
 
 ## Installation
 Copy this url: 
-```https://github.com/itisnajim/SocketIOUnity.git```
+```https://github.com/alex-suspicious/SocketIOUnityCallbacks```
 then in unity open Window -> Package Manager -> and click (+) add package from git URL... and past it there.
 
 ## Usage
