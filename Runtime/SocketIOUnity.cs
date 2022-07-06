@@ -81,10 +81,11 @@ public class SocketIOUnity : SocketIO
         EmitAsync(eventName, data).ContinueWith(t => {});
     }
 
-    public void EmitResponse(string eventName, Action<SocketIOResponse> ack, params object[] data)
+    public void Emit(string eventName, Action<SocketIOResponse> ack, params object[] data)
     {
         EmitAsync(eventName, CancellationToken.None, ack, data).ContinueWith(t => {});
     }
+
 
     public async Task EmitStringAsJSONAsync(string eventName, string json)
     {
