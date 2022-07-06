@@ -52,7 +52,7 @@ socket.Emit("eventName");
 socket.Emit("eventName", "Hello World");
 socket.Emit("eventName", someObject);
 
-socket.EmitResponse("eventName",(response)=>{
+socket.Emit("eventName",(response)=>{
     string text = response.GetValue<string>();
     print(text);
 }, someObject);
