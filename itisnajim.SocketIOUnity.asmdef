@@ -1,3 +1,21 @@
-﻿{
-	"name": "SocketIOUnityAssembly"
+{
+    "name": "SocketIOUnityAssembly",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Microsoft.Bcl.AsyncInterfaces.dll",
+        "Newtonsoft.Json.dll",
+        "System.Reactive.dll",
+        "System.Runtime.CompilerServices.Unsafe.dll",
+        "System.Text.Json.dll",
+        "System.Text.Encodings.Web.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
