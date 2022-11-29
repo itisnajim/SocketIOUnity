@@ -1,6 +1,6 @@
 {
   "name": "com.itisnajim.socketiounity",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "A Wrapper for [socket.io-client-csharp](https://github.com/doghappy/socket.io-client-csharp) to work with Unity.",
   "displayName": "Unity SocketIO",
   "unity": "2018.4",
