@@ -11,15 +11,17 @@ If you find this useful, please give it a star to show your support for this pro
 ## Supported Platforms
 💻 PC/Mac, 🍎 iOS, 🤖 Android
 
-Other platforms(including the Editor) have not been tested or/and may not work!
+Other platforms (including the Editor) have not been tested and/or may not work!
 
 ## Example
 ![Example](https://github.com/itisnajim/SocketIOUnity/blob/main/Samples~/example.gif?raw=true)
 
 ## Installation
 Copy this url: 
-```https://github.com/alex-suspicious/SocketIOUnityCallbacks```
-then in unity open Window -> Package Manager -> and click (+) add package from git URL... and past it there.
+
+```https://github.com/itisnajim/SocketIOUnity.git```
+then in Unity open Window -> Package Manager -> and click (+) add package from git URL... and paste it there.
+
 
 ## Usage
 Check the 'Samples~' folder and [socket.io-client-csharp](https://github.com/doghappy/socket.io-client-csharp) repo for more usage info.
@@ -97,7 +99,7 @@ socket.On("spin", (response) =>
 });
 ```
 
-### Connecting/Disconecting: 
+### Connecting/Disconnecting: 
 ```csharp
 socket.Connect();
 await socket.ConnectAsync();
