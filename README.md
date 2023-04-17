@@ -18,8 +18,10 @@ Other platforms (including the Editor) have not been tested and/or may not work!
 
 ## Installation
 Copy this url: 
+
 ```https://github.com/itisnajim/SocketIOUnity.git```
 then in Unity open Window -> Package Manager -> and click (+) add package from git URL... and paste it there.
+
 
 ## Usage
 Check the 'Samples~' folder and [socket.io-client-csharp](https://github.com/doghappy/socket.io-client-csharp) repo for more usage info.
@@ -51,6 +53,12 @@ socket.JsonSerializer = new NewtonsoftJsonSerializer();
 socket.Emit("eventName");
 socket.Emit("eventName", "Hello World");
 socket.Emit("eventName", someObject);
+
+socket.Emit("eventName",(response)=>{
+    string text = response.GetValue<string>();
+    print(text);
+}, someObject);
+
 socket.EmitStringAsJSON("eventName", "{\"foo\": \"bar\"}");
 await client.EmitAsync("hi", "socket.io"); // Here you should make the method async
 ```
