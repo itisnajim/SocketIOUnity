@@ -9,7 +9,7 @@ namespace SocketIOClient.Messages
     /// <summary>
     /// The server calls the client's callback
     /// </summary>
-    public class ClientAckMessage : IMessage
+    public class ClientAckMessage : IJsonMessage
     {
         public MessageType Type => MessageType.AckMessage;
 
@@ -29,7 +29,7 @@ namespace SocketIOClient.Messages
 
         public int BinaryCount { get; }
 
-        public int Eio { get; set; }
+        public EngineIO EIO { get; set; }
 
         public TransportProtocol Protocol { get; set; }
 
