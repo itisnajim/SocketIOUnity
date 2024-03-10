@@ -307,6 +307,9 @@
       <summary>Gets the Arabic Extended-A Unicode block (U+08A0-U+08FF).</summary>
       <returns>The Arabic Extended-A Unicode block (U+08A0-U+08FF).</returns>
     </member>
+    <member name="P:System.Text.Unicode.UnicodeRanges.ArabicExtendedB">
+      <summary>A <see cref="T:System.Text.Unicode.UnicodeRange" /> corresponding to the 'Arabic Extended-B' Unicode block (U+0870..U+089F).</summary>
+    </member>
     <member name="P:System.Text.Unicode.UnicodeRanges.ArabicPresentationFormsA">
       <summary>Gets the Arabic Presentation Forms-A Unicode block (U+FB50-U+FDFF).</summary>
       <returns>The Arabic Presentation Forms-A Unicode block (U+FB50-U+FDFF).</returns>

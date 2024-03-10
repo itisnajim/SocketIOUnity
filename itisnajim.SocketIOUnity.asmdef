@@ -9,7 +9,6 @@
     "precompiledReferences": [
         "Microsoft.Bcl.AsyncInterfaces.dll",
         "Newtonsoft.Json.dll",
-        "System.Reactive.dll",
         "System.Runtime.CompilerServices.Unsafe.dll",
         "System.Text.Json.dll",
         "System.Text.Encodings.Web.dll"
