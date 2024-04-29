@@ -34,5 +34,12 @@
     "name": "itisnajim",
     "email": "itisnajim@gmail.com",
     "url": "https://www.itisnajim.com"
-  }
+  },    
+  "samples": [
+        {
+            "displayName": "Socket Unity Client Example",
+            "description": "Contains sample code for Socket Unity Client",
+            "path": "Samples~/Sample"
+        }
+    ]
 }
