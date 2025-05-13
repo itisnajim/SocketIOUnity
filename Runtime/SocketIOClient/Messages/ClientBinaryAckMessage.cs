@@ -9,7 +9,7 @@ namespace SocketIOClient.Messages
     /// <summary>
     /// The server calls the client's callback with binary
     /// </summary>
-    public class ClientBinaryAckMessage : IMessage
+    public class ClientBinaryAckMessage : IJsonMessage
     {
         public MessageType Type => MessageType.BinaryAckMessage;
 
@@ -25,7 +25,7 @@ namespace SocketIOClient.Messages
 
         public int BinaryCount { get; set; }
 
-        public int Eio { get; set; }
+        public EngineIO EIO { get; set; }
 
         public TransportProtocol Protocol { get; set; }
 

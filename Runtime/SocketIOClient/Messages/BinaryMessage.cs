@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace SocketIOClient.Messages
 {
-    public class BinaryMessage : IMessage
+    public class BinaryMessage : IJsonMessage
     {
         public MessageType Type => MessageType.BinaryMessage;
 
@@ -21,7 +21,7 @@ namespace SocketIOClient.Messages
 
         public int BinaryCount { get; set; }
 
-        public int Eio { get; set; }
+        public EngineIO EIO { get; set; }
 
         public TransportProtocol Protocol { get; set; }
 

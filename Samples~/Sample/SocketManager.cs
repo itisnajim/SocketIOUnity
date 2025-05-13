@@ -31,7 +31,7 @@ public class SocketManager : MonoBehaviour
                     {"token", "UNITY" }
                 }
             ,
-            EIO = 4
+            EIO = EngineIO.V4
             ,
             Transport = SocketIOClient.Transport.TransportProtocol.WebSocket
         });
@@ -73,6 +73,15 @@ public class SocketManager : MonoBehaviour
         {
             ReceivedText.text += "Received On " + name + " : " + response.GetValue().GetRawText() + "\n";
         });
+    }
+
+    async void OnApplicationQuit()
+    {
+        if (socket != null && socket.Connected) 
+        {
+            await socket.DisconnectAsync();
+        }
+        socket?.Dispose();
     }
 
     public void EmitTest()

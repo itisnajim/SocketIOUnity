@@ -99,7 +99,7 @@ public class SocketIOUnity : SocketIO
         {
             msg.Json = "["+json+"]";
         }
-        await _transport.SendAsync(msg, CancellationToken.None).ConfigureAwait(false);
+        await Transport.SendAsync(msg, CancellationToken.None).ConfigureAwait(false);
     }
 
     public void EmitStringAsJSON(string eventName, string json)
